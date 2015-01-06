@@ -1,0 +1,12 @@
+[submodule "salt/formulas/zendserver"]
+	path = salt/formulas/zendserver
+	url = https://github.com/saltstack-formulas/zendserver-formula.git
+[submodule "salt/formulas/phpfpm"]
+	path = salt/formulas/phpfpm
+	url = https://github.com/Enrise/phpfpm-formula.git
+[submodule "salt/formulas/mariadb"]
+	path = salt/formulas/mariadb
+	url = https://github.com/Enrise/mariadb-formula.git
+[submodule "salt/formulas/nginx"]
+	path = salt/formulas/nginx
+	url = https://github.com/Enrise/nginx-formula.git

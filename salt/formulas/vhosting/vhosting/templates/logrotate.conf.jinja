@@ -1,0 +1,30 @@
+# Logrotate file managed by Salt
+
+{% if accumulator|default(False) %}
+{%- for logdir in accumulator['vhost_logrotate'] -%}
+{{ logdir }}/*.log
+{% endfor -%}
+{
+        daily
+        missingok
+        rotate 14
+        compress
+	      delaycompress
+        notifempty
+        dateformat -%Y-%m-%d
+        dateext
+        sharedscripts
+      	postrotate
+          if /etc/init.d/apache2 status > /dev/null ; then \
+              /etc/init.d/apache2 reload > /dev/null; \
+          fi;
+          [ -f /var/run/nginx.pid ] && kill -USR1 `cat /var/run/nginx.pid`
+      	endscript
+      	prerotate
+      		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+      			run-parts /etc/logrotate.d/httpd-prerotate; \
+      		fi; \
+        endscript
+}
+
+{% endif %}

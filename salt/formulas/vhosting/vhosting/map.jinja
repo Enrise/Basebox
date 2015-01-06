@@ -1,0 +1,27 @@
+# Magic mapping
+{% set webstack = salt['grains.filter_by']({
+    'vanilla.apache': {
+      'webserver_config_dir': '/etc/apache2',
+      'sites_available': '/etc/apache2/sites-available',
+      'sites_enabled': '/etc/apache2/sites-enabled',
+    },
+    'vanilla.nginx': {
+      'webserver_config_dir': '/etc/nginx',
+      'sites_available': '/etc/nginx/sites-available',
+      'sites_enabled': '/etc/nginx/sites-enabled',
+    },
+    'zendserver.apache': {
+      'webserver_config_dir': '/etc/apache2',
+      'sites_available': '/etc/apache2/sites-available',
+      'sites_enabled': '/etc/apache2/sites-enabled',
+    },
+    'zendserver.nginx': {
+      'webserver_config_dir': '/etc/nginx',
+      'sites_available': '/etc/nginx/sites-available',
+      'sites_enabled': '/etc/nginx/sites-enabled'
+    },
+}, grain='webstack', merge=salt['pillar.get']('vhosting:lookup'), default='vanilla.nginx') %}
+
+# Set some params here to make life a little easier down the line (DRY!)
+{%- set webserver_edition = salt['pillar.get']('vhosting:server:webserver_edition', 'vanilla') %}
+{%- set webserver = salt['pillar.get']('vhosting:server:webserver', 'nginx') %}

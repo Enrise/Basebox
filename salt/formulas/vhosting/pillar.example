@@ -1,0 +1,78 @@
+# Vhosting configuration
+vhosting:
+  # Server-wide settings. Configs you put here have effect on all associated services
+  server:
+    # Which webserver to use. Supported are nginx and Apache
+    webserver: nginx
+    # Which edition of the webserver to use. Currently supported: vanilla & zendserver
+    edition: vanilla
+
+  # Vhosts are per-user allowing multiple users to have multiple websites
+  users:
+    # Each user can have 1 or more *services* assigned
+    example:
+      # Adds the keyhost-key, allowing management of the SSH keys of those who can access this account
+      keyhost: True
+
+      # The vhosts for this user (if any)
+      vhost:
+        # The domain, without www and must be unique troughout this configuration
+        example.com:
+          # The docroot is by default /srv/http/USER/domains/DOMAIN but can be overruled
+          webroot: /srv/http/example/domains/example.com
+
+        example.net: {}
+          # No settings here, uses the complete defaults
+
+        morecontrol.eu:
+          # This vhost wants to provide its own template
+          template_file: salt://vhosting/templates/minimal.tmpl
+          #template_engine: jinja # default
+
+        example.org:
+          # This vhost follows the defaults, but does have a few additional HTTP aliases
+          aliases:
+            - example.eu
+            - example.biz
+
+        redirectme.com:
+          # This is a 'redirect vhost' which is just sending traffic to a different domain. Its vhost is very simple
+          redirect_to: 'http://www.example.com'
+
+        secured-site.com:
+          # This vhost follows the defaults but does have forced SSL
+          ssl:
+            # The configuration for SSL for this vhost
+            key: securedsite.key
+            cert: securedsite.pem
+            ca: rapidssl_chain.pem
+            forward: True
+
+        # Default vhost with special directory structure
+        deployable.com:
+          release_structure: True
+
+        # Default vhost but a different IP to listen on
+        customip.com:
+          listen_ip: 192.168.1.10
+
+      # The databases for this user (if any)
+      mysql_database:
+        # The databases, where it will automatically create user + db + grant for the given DB name (below)
+        foo:
+          password: 'topsecret'
+        bar:
+          password: 'verysecure'
+
+      # Cronjobs for this user (if any)
+      cronjob:
+        backup_db_example_com:
+          hour: 1
+          minute: 0
+          cmd: '/srv/http/example/domains/example.com/scripts/db-backup.sh'
+
+    otheruser:
+      vhosts:
+        # The unique domain
+        otherdomain.eu:
+        moredomains.com:

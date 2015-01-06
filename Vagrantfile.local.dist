@@ -1,0 +1,14 @@
+# Configure hostname
+$vm_hostname = "my.vagrant.box"
+$vm_ip       = "192.168.56.123"
+
+# Define how much memory you want to assign to the VM
+$vm_memory = "1024"
+$vm_cpus   = 1
+
+# This will tell the Vagrant box to either use NFS, or not. The default value is true
+# which will have give the best performance, but is more difficult on Windows hosts
+$use_nfs = false
+
+# Run Salt highstate upon provisioning
+$salt_highstate = true

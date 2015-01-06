@@ -1,0 +1,12 @@
+{
+  "name": "enrise/basebox",
+  "description": "Salted basebox for Enrise projects",
+  "authors": [
+    {
+      "name": "Frank Klaassen",
+      "email": "frank@enrise.com"
+    }
+  ],
+  "license": "proprietary",
+  "minimum-stability": "stable"
+}
