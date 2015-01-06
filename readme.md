@@ -1,10 +1,11 @@
 # Enrise basebox
+This box serves as a standardized version of Vagrant box and should be used for new projects.
 
-This box serves as a standarized version of Vagrant box and should be used for new projects.
-Provisioning is based on Salt, which uses various Saltstack-formulas to provide features.
+Provisioning is done using [Saltstack](http://saltstack.org), which uses various default [Saltstack-formulas](https://github.com/saltstack-formulas) and [custom Enrise formulas](https://github.com/enrise/?query=formula) to provide featurepacks.
 
-All are customizable and extendable but this box provides the base (a webstack).
-Further additions (e.g. installation of NodeJS, Postgres etc) can be added.
+This box provides a default webstack (ZendServer 7.0 + Nginx + MariaDB) using the [enrise/vhosting](https://github.com/enrise/vhosting) formula.
+
+Further requirements (e.g. Node, Postgres, Composer etc) can be added by the user of this box.
 
 ## Installing
 ### Using Composer

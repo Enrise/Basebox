@@ -39,8 +39,6 @@ Vagrant.configure("2") do |config|
   end
 
   # Create synchronised folders for salt.
-  #dst = "/srv/salt"
-  #File.exists?(File.expand_path(dst)) or Dir.mkdir(dst)
   config.vm.synced_folder $salt_root + "/salt", "/srv/salt/base", type: $type
   config.vm.synced_folder "salt", "/srv/salt/custom", type: $type
 
