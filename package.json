@@ -20,5 +20,6 @@
     "url": "https://github.com/enrise/basebox"
   },
   "license": "proprietary",
-  "private": true
+  "private": true,
+  "global": false
 }

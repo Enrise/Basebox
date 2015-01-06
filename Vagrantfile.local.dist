@@ -12,9 +12,9 @@ $use_nfs = false
 
 # Where is the Salt root?
 # For NPM installs:
-# $salt_root = node_module/enrise-basebox
+# $salt_root = "node_modules/enrise-basebox"
 # For Composer installs:
-# $salt_root = vendor/enrise/basebox
+# $salt_root = "vendor/enrise/basebox"
 
 # Run Salt highstate upon provisioning
 $salt_highstate = true
