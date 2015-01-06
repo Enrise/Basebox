@@ -3,7 +3,7 @@ This box serves as a standardized version of Vagrant box and should be used for 
 
 Provisioning is done using [Saltstack](http://saltstack.org), which uses various default [Saltstack-formulas](https://github.com/saltstack-formulas) and [custom Enrise formulas](https://github.com/enrise/?query=formula) to provide featurepacks.
 
-This box provides a default webstack (ZendServer 7.0 + Nginx + MariaDB) using the [enrise/vhosting](https://github.com/enrise/vhosting) formula.
+This box provides a default webstack (ZendServer 7.0 + Nginx + MariaDB) using the [enrise/vhosting-formula](https://github.com/enrise/vhosting-formula) formula.
 
 Further requirements (e.g. Node, Postgres, Composer etc) can be added by the user of this box.
 
@@ -60,10 +60,10 @@ This may or may not be desirable so be careful with the naming of your states an
 
 If you want to add custom states or pillars, you'll have to manage a custom `top.sls`. This will completely override the defaults.
 
-If you only want to modify the vhost/domains created you should create a file named `salt/pillars/project.sls` and configure it using the custom [enrise/vhosting](https://github.com/enrise/vhosting) package.
+If you only want to modify the vhost/domains created you should create a file named `salt/pillars/project.sls` and configure it using the custom [enrise/vhosting-formula](https://github.com/enrise/vhosting-formula) package.
 
 #### Custom vhosts
-By default `vhosts.sls` is loaded wich contains a default vhost based on the [enrise/vhosting](https://github.com/enrise/vhosting) package:
+By default `vhosts.sls` is loaded wich contains a default vhost based on the [enrise/vhosting-formula](https://github.com/enrise/vhosting-formula) package:
 ```yaml
 vhosting:
   users:
