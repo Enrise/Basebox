@@ -4,13 +4,13 @@ pillar_opts: False
 file_roots:
   base:
     - /srv/salt/custom/states/files
-    - /srv/salt/core/states/files
+    - /srv/salt/base/states/files
     - /srv/salt/custom/states/templates
-    - /srv/salt/core/states/template
+    - /srv/salt/base/states/template
     - /srv/salt/custom/states
-    - /srv/salt/core/states
+    - /srv/salt/base/states
 
 pillar_roots:
   base:
     - /srv/salt/custom/pillar
-    - /srv/salt/core/pillar
+    - /srv/salt/base/pillar

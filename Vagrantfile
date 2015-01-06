@@ -5,11 +5,12 @@
 # or override these values in a Vagrantfile.local.
 $vm_memory      ||= "1024"
 $vm_cpus        ||= nil
-$use_nfs          = true
+$use_nfs        ||= true
 $vm_hostname    ||= 'unconfigured.vagrant.box'
 $vm_aliases     ||= nil
-$vm_ip            = '192.168.56.100'
-$salt_highstate   = true
+$vm_ip          ||= '192.168.56.100'
+$salt_highstate ||= true
+$salt_root      ||= 'vendor/enrise/basebox'
 
 # Include Vagrantfile.local if it exists to overwrite the variables.
 if File.exists?("Vagrantfile.local")
@@ -26,7 +27,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.hostname = hostname
-  config.vm.network "private_network", ip: $ip
+  config.vm.network "private_network", ip: $vm_ip
   config.ssh.forward_agent = true
 
   config.vm.synced_folder ".", "/vagrant", type: $type
@@ -38,9 +39,9 @@ Vagrant.configure("2") do |config|
   end
 
   # Create synchronised folders for salt.
-  dst = "/srv/salt"
-  File.exists?(File.expand_path(dst)) or Dir.mkdir(dst)
-  config.vm.synced_folder "vendor/enrise/basebox/salt", "/srv/salt/core", type: $type
+  #dst = "/srv/salt"
+  #File.exists?(File.expand_path(dst)) or Dir.mkdir(dst)
+  config.vm.synced_folder $salt_root + "/salt", "/srv/salt/base", type: $type
   config.vm.synced_folder "salt", "/srv/salt/custom", type: $type
 
   config.vm.provider "virtualbox" do |v|
@@ -81,18 +82,16 @@ Vagrant.configure("2") do |config|
   config.vm.post_up_message = <<MSG
   Your Vagrant box is now ready to be used!
 
-  Modifications to the configuration can be done in states and pillars.
-  Afterwards either run "vagrant provision" or "salt-call state.highstate" from inside the box.
-
-  http://$vm_hostname
+  Please see the the readme of the basebox for instructions on how to customize this VM.
+  Afterwards either run "vagrant provision" or "salt-call state.highstate" from inside the box to apply the config.
 
   Type "vagrant ssh" to login to the shell.
 MSG
 
   # And start the provisioning run!
   config.vm.provision :salt do |salt|
-    salt.minion_config = "vendor/enrise/basebox/salt/minion"
-    salt.run_highstate = $highstate
+    salt.minion_config = $salt_root + "/salt/minion"
+    salt.run_highstate = $salt_highstate
 
     salt.colorize = true
     salt.log_level = "info"

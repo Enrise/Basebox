@@ -10,5 +10,11 @@ $vm_cpus   = 1
 # which will have give the best performance, but is more difficult on Windows hosts
 $use_nfs = false
 
+# Where is the Salt root?
+# For NPM installs:
+# $salt_root = node_module/enrise-basebox
+# For Composer installs:
+# $salt_root = vendor/enrise/basebox
+
 # Run Salt highstate upon provisioning
 $salt_highstate = true
