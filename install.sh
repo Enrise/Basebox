@@ -26,6 +26,11 @@ then
   cp dev/basebox/salt.dist dev/salt -r
 fi
 
+# Initiate the submodules
+cd dev/basebox
+git submodule sync
+git submodule update --init --recursive
+
 echo -e "\e[32m"
 echo "****"
 echo "Install complete"
