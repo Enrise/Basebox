@@ -112,7 +112,6 @@ Its recommended to use git submodules.
 Add a submodule in `salt/formulas` and symlink the folder (in its `name/name` form) into the states folder. This may also be used to get newer versions of formulas since the fileserver will automatically take the custom one over the core.
 
 ## Starting the VM
-
 Ready, let's start!
 
 Execute this in your shell:
