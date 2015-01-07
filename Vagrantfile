@@ -3,14 +3,27 @@
 
 # You can set these variables in ~/.vagrant.d/Vagrantfile, if you wish to change the defaults.
 # or override these values in a Vagrantfile.local.
-$vm_memory      ||= "1024"
-$vm_cpus        ||= nil
-$use_nfs        ||= true
-$vm_hostname    ||= 'unconfigured.vagrant.box'
-$vm_aliases     ||= nil
-$vm_ip          ||= '192.168.56.100'
-$salt_highstate ||= true
-$salt_root      ||= 'vendor/enrise/basebox'
+$vm_memory        ||= "1024"
+$vm_cpus          ||= nil
+$use_nfs          ||= true
+$vm_hostname      ||= 'unconfigured.vagrant.box'
+$vm_aliases       ||= nil
+$vm_ip            ||= '192.168.56.100'
+$salt_highstate   ||= true
+$salt_custom_path ||= "salt"
+$salt_root        ||= nil
+
+# Determine where Salt is located
+if File.exists?("node_modules/enrise-basebox")
+  $salt_root = "node_modules/enrise-basebox"
+elsif File.exists?("vendor/enrise/basebox")
+  $salt_root = "vendor/enrise/basebox"
+end
+
+# Salt path with custom configs
+if not File.exists?($salt_custom_path)
+  Dir.mkdir($salt_custom_path)
+end
 
 # Include Vagrantfile.local if it exists to overwrite the variables.
 if File.exists?("Vagrantfile.local")
@@ -40,7 +53,7 @@ Vagrant.configure("2") do |config|
 
   # Create synchronised folders for salt.
   config.vm.synced_folder $salt_root + "/salt", "/srv/salt/base", type: $type
-  config.vm.synced_folder "salt", "/srv/salt/custom", type: $type
+  config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: $type
 
   config.vm.provider "virtualbox" do |v|
     v.name = hostname
