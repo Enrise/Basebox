@@ -135,9 +135,5 @@ To pull in the changes you'll have to update the git submodule of the basebox:
 ```
 cd dev/basebox
 git pull origin master
-```
-
-Don't forget to check for changes in its dependencies:
-```
 git submodule sync  && git submodule update --init --recursive
 ```
