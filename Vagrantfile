@@ -81,6 +81,18 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  # Check if vagrant-triggers is available for update checks
+  if Vagrant.has_plugin?("vagrant-triggers")
+    {
+      [:up, :resume] => $basebox_path + "/check_update.sh",
+    }.each do |command, trigger|
+      config.trigger.before command, :stdout => true do
+        info "Executing #{command} action..."
+        run "#{trigger}"
+      end
+    end
+  end
+
   config.vm.post_up_message = <<MSG
   Your Vagrant box is now ready to be used!
 
