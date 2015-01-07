@@ -1,8 +1,9 @@
-# Configure hostname
+# Configure base settings for your box
 $vm_hostname = "my.vagrant.box"
 $vm_ip       = "192.168.56.123"
+$vm_box      = "ubuntu/trusty64"
 
-# Define how much memory you want to assign to the VM
+# Amount of memory (in MB)
 $vm_memory = "1024"
 $vm_cpus   = 1
 
@@ -10,8 +11,11 @@ $vm_cpus   = 1
 # which will have give the best performance, but is more difficult on Windows hosts
 $use_nfs = false
 
-# If the Salt path is located somewhere else it can be entered here.
-# $salt_custom_path = "salt"
+# If the basebox is located somewhere else it can be entered here.
+$basebox_path = "dev/basebox"
+
+# If the Salt custom path is located somewhere else it can be entered here.
+# $salt_custom_path = "dev/salt"
 
 # Run Salt highstate upon provisioning
 $salt_highstate = true

@@ -8,48 +8,41 @@ This box provides a default webstack (ZendServer 7.0 + Nginx + MariaDB) using th
 Further requirements (e.g. Node, Postgres, Composer etc) can be added by the user of this box.
 
 ## Installing
-### Using Composer
-
-Add the repository and require the package:
+Add the basebox as a Git submodule to your project from the root of your project:
 ```
-composer config repositories.enrise-basebox vcs git@github.com:enrise/basebox.git
-composer require enrise/basebox:dev-master
+git submodule add git@github.com:enrise/basebox dev/basebox
 ```
-
-### Using npm
-This package is also npm compatible.
-
-In order to install it, run the following command from the root of your project:
-```
-npm install enrise/basebox
-```
+> **Note**: You may use a custom path to check it out to, but this value must also be set accordingly in `Vagrantfile.local` (parameter: $basebox_path)
 
 ## Configuration
-Once the vendor package has been installed you can proceed with its configuration.
+Once the basebox package has been installed you can proceed with its configuration.
 
 ### Vagrant
 In order to benefit from base updates you should symlink the Vagrantfile to the root of your project:
 ```
-ln -s vendor/enrise/basebox/Vagrantfile .
+ln -s dev/basebox/Vagrantfile .
 ```
-> If you have installed it via NPM you should use `node_modules/enrise-basebox/Vagrantfile` instead.
+You could also copy this file instead of symlinking, but this would require a manual action to update which is not recommended.
 
-You can also copy the file, but this would require a manual action to update.
-
-Configuration for the Vagrantfile is being dealt with via `Vagrantfile.local`.
-A default is provided but should be renamed from the base:
+The configuration of the Vagrantbox should always be done in `Vagrantfile.local`.
+A default is provided but should be copied/renamed to the root of your project:
 ```
-cp vendor/enrise/basebox/Vagrantfile.local.dist Vagrantfile.local
+cp dev/basebox/Vagrantfile.local.dist Vagrantfile.local
 ```
-You should change the parameters to match your project.
+You should change the parameters (e.g. ip, hostname) to match your project before booting.
 
 ### Salt
-By default Salt will install Zendserver + Nginx and creates a vhost called "project-dev.enrise.com". If you want to override this, or do not want it to do the defaults you'll need to customize it.
+By default Salt will install Zendserver (7.0) + Nginx and creates a vhost called "project-dev.enrise.com".
+If you want to override this, or do not want it to do the defaults you'll need to customize it.
 
-For this a dist structure has been provided which is the `salt.dist` folder located in either `vendor/enrise/basebox` or `node_modules/enrise-basebox`.
-This will need to be **copied** to the root of your project.
+For this a dist structure has been provided which is the `salt.dist` folder located in `dev/basebox`. This will need to be copied to `./dev/salt`:
+```
+cp dev/basebox/salt.dist dev/salt -r
+```
+> **Note:** This path is configurable in `Vagrantfile.local` (parameter: $salt_custom_path)
 
-The Salt fileserver will look for the files configured in the topfile. For this is will search in both the "core" module as customizations.
+The Salt fileserver will look for the files configured in the topfile.
+For this is will search in both the "core" module as customizations.
 
 The priority of loading is:
 - Custom files

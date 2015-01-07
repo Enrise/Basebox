@@ -7,23 +7,12 @@ $vm_memory        ||= "1024"
 $vm_cpus          ||= nil
 $use_nfs          ||= true
 $vm_hostname      ||= 'unconfigured.vagrant.box'
+$vm_box           ||= 'ubuntu/trusty64'
 $vm_aliases       ||= nil
 $vm_ip            ||= '192.168.56.100'
+$basebox_path     ||= 'dev/basebox'
 $salt_highstate   ||= true
-$salt_custom_path ||= "salt"
-$salt_root        ||= nil
-
-# Determine where Salt is located
-if File.exists?("node_modules/enrise-basebox")
-  $salt_root = "node_modules/enrise-basebox"
-elsif File.exists?("vendor/enrise/basebox")
-  $salt_root = "vendor/enrise/basebox"
-end
-
-# Salt path with custom configs
-if not File.exists?($salt_custom_path)
-  Dir.mkdir($salt_custom_path)
-end
+$salt_custom_path ||= 'dev/salt'
 
 # Include Vagrantfile.local if it exists to overwrite the variables.
 if File.exists?("Vagrantfile.local")
@@ -37,23 +26,19 @@ Vagrant.configure("2") do |config|
   # Configure the hostname.
   hostname = $vm_hostname
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = $vm_box
 
   config.vm.hostname = hostname
   config.vm.network "private_network", ip: $vm_ip
   config.ssh.forward_agent = true
 
+  # Create synchronised folders
   config.vm.synced_folder ".", "/vagrant", type: $type
+  config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: $type
 
-  if !$vm_aliases.nil?
-    aliases = [
-      $vm_aliases
-    ]
+  if File.exists?($salt_custom_path)
+    config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: $type
   end
-
-  # Create synchronised folders for salt.
-  config.vm.synced_folder $salt_root + "/salt", "/srv/salt/base", type: $type
-  config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: $type
 
   config.vm.provider "virtualbox" do |v|
     v.name = hostname
@@ -75,6 +60,12 @@ Vagrant.configure("2") do |config|
 
   # Add aliases to the hosts-file.
   if Vagrant.has_plugin?("vagrant-hostsupdater")
+    # Deal with aliases if set (used in hosts updater)
+    if !$vm_aliases.nil?
+      aliases = [
+        $vm_aliases
+      ]
+    end
     config.hostsupdater.aliases = aliases
   end
 
@@ -101,7 +92,7 @@ MSG
 
   # And start the provisioning run!
   config.vm.provision :salt do |salt|
-    salt.minion_config = $salt_root + "/salt/minion"
+    salt.minion_config = $basebox_path + "/salt/minion"
     salt.run_highstate = $salt_highstate
 
     salt.colorize = true
