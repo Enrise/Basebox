@@ -10,3 +10,6 @@
 [submodule "salt/formulas/nginx"]
 	path = salt/formulas/nginx
 	url = https://github.com/Enrise/nginx-formula.git
+[submodule "salt/formulas/vhosting"]
+	path = salt/formulas/vhosting
+	url = https://github.com/Enrise/vhosting-formula.git
