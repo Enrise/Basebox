@@ -38,11 +38,12 @@ if [ $? -eq 0 ]; then
     echo "Your basebox requires an update."
   elif [ $REMOTE = $BASE ]; then
     echo -n -e "\e[90m"
-    echo "Your basebox has local changes"
+    echo "Your basebox has local changes."
+    echo "Customizations should be done in the Vagrantfile.local and dev/salt folders instead!"
+    echo "Please revert these changes where possible"
   else
     echo -n -e "\e[31m"
     echo "Unable to check for basebox updates"
   fi
-
-  echo -n -e "\e[39m"
+  echo -n -e "\e[0m"
 fi

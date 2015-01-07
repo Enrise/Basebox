@@ -136,3 +136,4 @@ cd dev/basebox
 git pull origin master
 git submodule sync  && git submodule update --init --recursive
 ```
+> If you have the `vagrant-triggers` plugin installed it will automatically check and notify you if there are updates upon the following tasks: up, resume and provision.
