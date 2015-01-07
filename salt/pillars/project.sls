@@ -5,3 +5,4 @@ include:
   - defaults.phpfpm
   - defaults.zendserver
   - defaults.vhosting
+  - vhosts
