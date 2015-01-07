@@ -130,6 +130,16 @@ vagrant ssh
 
 ## Updating the basebox
 Its expected that the basebox will be extended and improved from time to time.
+
+### Automatic
+Execute the following command from the root of your project:
+```
+./dev/basebox/update.sh
+```
+
+This will execute everything listed under the manual steps below but will automatically find the actual checkout path based on the settings in `Vagrantfile.local`.
+
+### Manual
 To pull in the changes you'll have to update the git submodule of the basebox:
 ```
 cd dev/basebox
