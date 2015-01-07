@@ -132,7 +132,7 @@ vagrant ssh
 Its expected that the basebox will be extended and improved from time to time.
 
 ### Automatic
-Execute the following command from the root of your project:
+Execute the following command from your git repo on your development machine:
 ```
 ./dev/basebox/update.sh
 ```
