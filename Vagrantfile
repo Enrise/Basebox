@@ -84,10 +84,9 @@ Vagrant.configure("2") do |config|
   # Check if vagrant-triggers is available for update checks
   if Vagrant.has_plugin?("vagrant-triggers")
     {
-      [:up, :resume] => $basebox_path + "/check_update.sh",
+      [:up, :resume, :provision] => $basebox_path + "/check_update.sh",
     }.each do |command, trigger|
       config.trigger.before command, :stdout => true do
-        info "Executing #{command} action..."
         run "#{trigger}"
       end
     end
