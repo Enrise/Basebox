@@ -4,7 +4,7 @@ $vm_ip       = "192.168.56.123"
 $vm_box      = "ubuntu/trusty64"
 
 # Amount of memory (in MB)
-$vm_memory = "1024"
+$vm_memory = 1024
 $vm_cpus   = 1
 
 # This will tell the Vagrant box to either use NFS, or not. The default value is true
@@ -12,7 +12,7 @@ $vm_cpus   = 1
 $use_nfs = false
 
 # If the basebox is located somewhere else it can be entered here.
-$basebox_path = "dev/basebox"
+# $basebox_path = "dev/basebox"
 
 # If the Salt custom path is located somewhere else it can be entered here.
 # $salt_custom_path = "dev/salt"
