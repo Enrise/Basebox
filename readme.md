@@ -128,3 +128,16 @@ Once it has been completed, the box can be accessed:
 ```
 vagrant ssh
 ```
+
+## Updating the basebox
+Its expected that the basebox will be extended and improved from time to time.
+To pull in the changes you'll have to update the git submodule of the basebox:
+```
+cd dev/basebox
+git pull origin master
+```
+
+Don't forget to check for changes in its dependencies:
+```
+git submodule sync  && git submodule update --init --recursive
+```
