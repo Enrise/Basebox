@@ -39,8 +39,7 @@ cp dev/basebox/Vagrantfile.local.dist Vagrantfile.local
 You should change the parameters (e.g. ip, hostname) to match your project before booting.
 
 ### Salt
-By default Salt will install Zendserver (7.0) + Nginx and creates a vhost called "project-dev.enrise.com".
-If you want to override this, or do not want it to do the defaults you'll need to customize it.
+By default Salt will install Zendserver (7.0) + Nginx once you have created vhosts. If you specify databases, it will install MySQL-server as well.
 
 For this a dist structure has been provided which is the `salt.dist` folder located in `dev/basebox`. This will need to be copied to `./dev/salt`:
 ```
@@ -59,25 +58,32 @@ Salt stops searching as soon as it has reached a matching file.
 This may or may not be desirable so be careful with the naming of your states and files.
 
 If you want to add custom states or pillars, you'll have to manage a custom `top.sls`. This will completely override the defaults.
-
-If you only want to modify the vhost/domains created you should create a file named `salt/pillars/project.sls` and configure it using the custom [enrise/vhosting-formula](https://github.com/enrise/vhosting-formula) package.
+> For this its also required that your topfile includes `core` and `vhosting`.
 
 #### Custom vhosts
-By default `vhosts.sls` is loaded wich contains a default vhost based on the [enrise/vhosting-formula](https://github.com/enrise/vhosting-formula) package:
+The `vhosts.sls` state will be loaded. In the core, this is an empty state which means no vhosts or databases will be available.
+
+In order to get this to work you'll have to rename distributed vhost file:
+```
+mv dev/salt/pillars/vhosts.sls.dist dev/salt/pillars/vhosts.sls
+```
+and edit it accordingly. A basic vhost could look like this:
 ```yaml
 vhosting:
   users:
-    project:
+    projectname:
       deploy_structure: True
       vhost:
-        project-dev.enrise.com:
+        projectname-dev.enrise.com:
           webroot_public: True
       mysql_database:
         project:
           password: changeme
 ```
 
-Its recommended to create `salt/vhosts.sls` in your custom folder and configure it as you see fit. It will be loaded instead of the default.
+This will create paths (using default deploy structure), install the webserver, creates a vhost and enables it and creates a MySQL user/db pair.
+
+A description of options for the vhosting is available in the [vhosting formula documentation](https://github.com/enrise/vhosting-formula).
 
 > **Note:**: If you do not specify vhosts, no webserver will be installed. The same applies on mysql_database: no databases = no MySQL installed.
 

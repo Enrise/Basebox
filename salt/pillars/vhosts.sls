@@ -1,10 +1,1 @@
-vhosting:
-  users:
-    project:
-      deploy_structure: True
-      vhost:
-        project-dev.enrise.com:
-          webroot_public: True
-      mysql_database:
-        project:
-          password: changeme
+# Dummy file to not break if missing. User is expected to create one in the userspace.
