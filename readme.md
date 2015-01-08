@@ -77,7 +77,7 @@ vhosting:
         projectname-dev.enrise.com:
           webroot_public: True
       mysql_database:
-        project:
+        projectname:
           password: changeme
 ```
 
@@ -86,6 +86,18 @@ This will create paths (using default deploy structure), install the webserver, 
 A description of options for the vhosting is available in the [vhosting formula documentation](https://github.com/enrise/vhosting-formula).
 
 > **Note:**: If you do not specify vhosts, no webserver will be installed. The same applies on mysql_database: no databases = no MySQL installed.
+
+If you use the config as above it will create a folder structure:
+```
+/srv/http/projectname/hosts/projectname-dev.enrise.net
+```
+
+This folder (used in the vhost) contains a symlink to `../current/public`.
+The only thing that remains is a symlink:
+```
+cd /srv/http/projectname
+ln -s /vagrant current
+```
 
 #### Custom webserver
 Default behavior (e.g. Zendserver+Nginx) can be overruled by creating a file in `salt/pillars/defaults` with just the information you want to override or extend.

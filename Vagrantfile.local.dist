@@ -7,6 +7,9 @@ $vm_box      = "ubuntu/trusty64"
 $vm_memory = 1024
 $vm_cpus   = 1
 
+# The user to mount the /vagrant share as. This must match your web-user.
+# $vm_username = "project"
+
 # This will tell the Vagrant box to either use NFS, or not. The default value is true
 # which will have give the best performance, but is more difficult on Windows hosts
 $use_nfs = false
