@@ -1,0 +1,10 @@
+vhosting:
+  users:
+    projectname:
+      deploy_structure: True
+      vhost:
+        projectname-dev.enrise.com:
+          webroot_public: True
+      mysql_database:
+        project:
+          password: changeme

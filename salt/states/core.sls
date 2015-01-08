@@ -5,7 +5,3 @@ salt-minion:
   service.running:
     - enable: False
     - reload: True
-
-# Temporary workaround for vhosting limitation
-exclude:
-  - id: webistrano_key_project
