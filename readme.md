@@ -147,3 +147,9 @@ git pull origin master
 git submodule sync  && git submodule update --init --recursive
 ```
 > If you have the `vagrant-triggers` plugin installed it will automatically check and notify you if there are updates upon the following tasks: up, resume and provision.
+
+## Known issues
+Currently there are some known issues:
+* The first highstate run fails due to a glitch in the vhosting module: [issue #1](https://github.com/Enrise/vhosting-formula/issues/1).
+  Simply rerunning `vagrant provision` will resolve this. (07-01-2015)
+* Salt-minion service shows up as changed every run (07-01-2015)
