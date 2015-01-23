@@ -5,6 +5,10 @@ vhosting:
       vhost:
         projectname-dev.enrise.com:
           webroot_public: True
+          fastcgi_params:
+            - fastcgi_param APPLICATION_ENV development;
+          extra_config:
+            - sendfile off;
       mysql_database:
         project:
           password: changeme
