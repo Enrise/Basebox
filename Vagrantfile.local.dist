@@ -3,12 +3,12 @@ $vm_hostname = "my.vagrant.box"
 $vm_ip       = "192.168.56.123"
 $vm_box      = "ubuntu/trusty64"
 
-# Amount of memory (in MB)
+# Optional aliases to set (requires vagrant-hostsupdater plugin)
+#$vm_aliases  = ['alias1.nl', 'alias2.com']
+
+# Define how much memory you want to assign to the VM
 $vm_memory = 1024
 $vm_cpus   = 1
-
-# The user to mount the /vagrant share as. This must match your web-user.
-# $vm_username = "project"
 
 # This will tell the Vagrant box to either use NFS, or not. The default value is true
 # which will have give the best performance, but is more difficult on Windows hosts

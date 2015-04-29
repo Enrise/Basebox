@@ -1,4 +1,4 @@
-# Minion specific settings
+# Run before-tasks
 salt-minion:
   pkg:
     - installed

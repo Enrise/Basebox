@@ -1,7 +1,6 @@
 vhosting:
   users:
-    projectname:
-      deploy_structure: True
+    project:
       vhost:
         projectname-dev.enrise.com:
           webroot_public: True

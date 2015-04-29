@@ -6,7 +6,6 @@
 $vm_memory        ||= "1024"
 $vm_cpus          ||= nil
 $use_nfs          ||= true
-$vm_username      ||= 'project'
 $vm_hostname      ||= 'unconfigured.vagrant.box'
 $vm_box           ||= 'ubuntu/trusty64'
 $vm_aliases       ||= nil
@@ -34,7 +33,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # Create synchronised folders
-  config.vm.synced_folder ".", "/vagrant", :type => $type, :owner => $vm_username, :group => $vm_username,:mount_options => ["dmode=755","fmode=755"]
+  config.vm.synced_folder ".", "/vagrant", :type => $type, :owner => 'vagrant', :group => 'vagrant',:mount_options => ["dmode=775","fmode=755"]
   config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: $type
 
   if File.exists?($salt_custom_path)
@@ -63,9 +62,7 @@ Vagrant.configure("2") do |config|
   if Vagrant.has_plugin?("vagrant-hostsupdater")
     # Deal with aliases if set (used in hosts updater)
     if !$vm_aliases.nil?
-      aliases = [
-        $vm_aliases
-      ]
+      aliases = $vm_aliases
     end
     config.hostsupdater.aliases = aliases
   end
