@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # Create synchronised folders
-  config.vm.synced_folder ".", "/vagrant", :type => $type, :owner => $vm_username, :group => $vm_username,:mount_options => ["dmode=755","fmode=644"]
+  config.vm.synced_folder ".", "/vagrant", :type => $type, :owner => $vm_username, :group => $vm_username,:mount_options => ["dmode=755","fmode=755"]
   config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: $type
 
   if File.exists?($salt_custom_path)
