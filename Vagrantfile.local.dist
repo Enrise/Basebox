@@ -3,7 +3,10 @@ $vm_hostname = "my.vagrant.box"
 $vm_ip       = "192.168.56.123"
 $vm_box      = "ubuntu/trusty64"
 
-# Amount of memory (in MB)
+# Optional aliases to set (requires vagrant-hostsupdater plugin)
+#$vm_aliases  = ['alias1.nl', 'alias2.com']
+
+# Define how much memory you want to assign to the VM
 $vm_memory = 1024
 $vm_cpus   = 1
 

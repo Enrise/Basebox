@@ -1,4 +1,5 @@
 base:
   '*':
-    - core
+    - core.before
     - vhosting
+    - core.after
