@@ -171,3 +171,4 @@ Currently there are some known issues:
 * The first highstate run fails due to a glitch in the vhosting module: [issue #1](https://github.com/Enrise/vhosting-formula/issues/1).
   Simply rerunning `vagrant provision` will resolve this. (07-01-2015)
 * Salt-minion service shows up as changed every run (07-01-2015)
+* The user the /vagrant mountpoint is mounted as does not exist during the first run. This requires it to be set to `vagrant` before and switched back the the desired one followed by a `vagrant reload` to activate those changes.
