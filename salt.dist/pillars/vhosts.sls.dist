@@ -1,10 +1,9 @@
 vhosting:
   users:
-    vagrant:
+    project:
       vhost:
         projectname-dev.enrise.com:
           webroot_public: True
-          webroot: /vagrant
           fastcgi_params:
             - fastcgi_param APPLICATION_ENV development;
           extra_config:
