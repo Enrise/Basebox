@@ -1,17 +1,18 @@
 # Run after-tasks
 {% from "vhosting/map.jinja" import webstack, webserver_edition, webserver with context %}
+{%- set project_users = salt['pillar.get']('vhosting:users') %}
 
 extend:
-  {%- for user in salt['pillar.get']('vhosting:users') %}
+{%- for user in project_users %}
   {{ user }}:
     user.present:
-      - group:
-        - project
+      - groups:
+        - {{ user }}
         - vagrant
-  {%- endfor %}
+{%- endfor %}
 
 # Create symlinks to the default Vagrant mountpoint
-{%- for user in salt['pillar.get']('vhosting:users') %}
+{%- for user in project_users %}
 /srv/http/{{ user }}/current:
   file.symlink:
     - target: /vagrant
