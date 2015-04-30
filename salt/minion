@@ -14,3 +14,5 @@ pillar_roots:
   base:
     - /srv/salt/custom/pillars
     - /srv/salt/base/pillars
+
+mysql.default_file: /etc/mysql/debian.cnf
