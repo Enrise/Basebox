@@ -2,12 +2,12 @@
 {% from "vhosting/map.jinja" import webstack, webserver_edition, webserver with context %}
 {%- set project_users = salt['pillar.get']('vhosting:users') %}
 
+# Move user to the Vagrant group
 extend:
 {%- for user in project_users %}
   {{ user }}:
     user.present:
-      - groups:
-        - {{ user }}
+      - group:
         - vagrant
 {%- endfor %}
 
