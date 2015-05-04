@@ -7,7 +7,7 @@ extend:
 {%- for user in project_users %}
   {{ user }}:
     user.present:
-      - group:
+      - groups:
         - vagrant
 {%- endfor %}
 
