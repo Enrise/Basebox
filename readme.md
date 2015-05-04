@@ -127,7 +127,18 @@ The custom file will always take precedence.
 
 #### Adding formulas
 Its recommended to use git submodules.
-Add a submodule in `salt/formulas` and symlink the folder (in its `name/name` form) into the states folder. This may also be used to get newer versions of formulas since the fileserver will automatically take the custom one over the core.
+Add a submodule in `salt/formulas` and symlink the folder (in its `name/name` form) into the states folder.
+This may also be used to get newer versions of formulas since the fileserver will automatically take the custom one over the core.
+
+#### Customizing pillars
+Certain formulas may require specific pillars to change their default behavior.
+For this you should use the `custom.sls` file located in the pillar folder.
+
+#### Customizing states
+If you want to extend the basebox, e.g. you have added a formula and want to use it you can customize the `custom` state.
+The `custom.sls` file is located in the `states` folder and allows you to specify your own Salt states.
+
+You can use this to include formulas or add in specific requirements for your box.
 
 ## Starting the VM
 Ready, let's start!
