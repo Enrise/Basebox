@@ -9,19 +9,19 @@ then
 fi
 
 # Symlink the vagrantfile
-if [ ! -e Vagrantfile ];
+if [[ ! -e Vagrantfile ]];
 then
   ln -s dev/basebox/Vagrantfile .
 fi
 
 # Copy the local config file
-if [ ! -e Vagrantfile.local ];
+if [[ ! -e Vagrantfile.local ]];
 then
   cp dev/basebox/Vagrantfile.local.dist Vagrantfile.local
 fi
 
 # Copy the customization structure
-if [ ! -e dev/salt ];
+if [[ ! -e dev/salt ]];
 then
   cp dev/basebox/salt.dist dev/salt -r
 fi

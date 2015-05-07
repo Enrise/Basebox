@@ -30,14 +30,14 @@ if [ $? -eq 0 ]; then
   REMOTE=$(git rev-parse @{u})
   BASE=$(git merge-base @ @{u})
 
-  if [ $LOCAL = $REMOTE ]; then
-    echo -n -e "\e[39m"
-    echo "Your basebox is up-to-date."
-  elif [ $LOCAL = $BASE ]; then
+  if [[ $LOCAL == $REMOTE ]]; then
     echo -n -e "\e[92m"
+    echo "Your basebox is up-to-date."
+  elif [[ $LOCAL == $BASE ]]; then
+    echo -n -e "\e[36m"
     echo "Your basebox requires an update."
-  elif [ $REMOTE = $BASE ]; then
-    echo -n -e "\e[90m"
+  elif [[ $REMOTE == $BASE ]]; then
+    echo -n -e "\e[33m"
     echo "Your basebox has local changes."
     echo "Customizations should be done in the Vagrantfile.local and dev/salt folders instead!"
     echo "Please revert these changes where possible"
