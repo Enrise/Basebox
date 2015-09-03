@@ -108,6 +108,11 @@ MSG
     salt.minion_config = $basebox_path + "/salt/minion"
     salt.run_highstate = $salt_highstate
 
+    # Start Temporary Workaround for Vagrant Issues #6011, #6029
+    salt.install_args = "-P"
+    salt.bootstrap_options = "-F -c /tmp -P"
+    # End Temporary Workaround
+
     salt.colorize = true
     salt.log_level = "info"
     salt.verbose = true
