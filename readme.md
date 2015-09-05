@@ -43,7 +43,7 @@ By default Salt will install Zendserver (7.0) + Nginx once you have created vhos
 
 For this a dist structure has been provided which is the `salt.dist` folder located in `dev/basebox`. This will need to be copied to `./dev/salt`:
 ```
-cp dev/basebox/salt.dist dev/salt -r
+cp -r dev/basebox/salt.dist dev/salt
 ```
 > **Note:** This path is configurable in `Vagrantfile.local` (parameter: $salt_custom_path)
 
