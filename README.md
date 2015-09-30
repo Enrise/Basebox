@@ -117,7 +117,7 @@ Create `salt/pillars/defaults/zendserver.sls` and set the changed value:
 
 ```yaml
 zendserver:
-  webserver: apache2  
+  webserver: apache2
   version:
     apache: 2.4
 ```
@@ -177,6 +177,19 @@ git submodule sync  && git submodule update --init --recursive
 ```
 > If you have the `vagrant-triggers` plugin installed it will automatically check and notify you if there are updates upon the following tasks: up, resume and provision.
 
-## Known issues
-Currently there are some known issues:
-* Salt-minion service shows up as changed every run (07-01-2015). This has no adverse effects whatsoever and can be ignored safely.
+## Standard packages
+The basebox contains a variety of standard installed packages, which are typically used by developers / devops.
+A list of what packages are installed by default can be seen by viewing `dev/salt/states/packages/init.sls`.
+
+## Sending mail
+The basebox comes with [Mailhog](https://github.com/mailhog/Mailhog/), which catches mails that are being sent via the system's sendmail.
+Mailhog can be found on HTTP port 8025 by browsing to `http://your.project.box:8025`, and will show an overview of the sent mails.
+
+Releasing the mail, thus delivering it for real, can be done as follows:
+1. Click on the mail you want to release
+2. In the mail detail page, click on the release button in the top bar
+
+## Issues
+For a list of known issues, please see the [GitHub project issue tracker](https://github.com/Enrise/Basebox/issues)
+If you have an issue with the basebox, don't hesitate to let us know there, and we will do our best to help you.
+
