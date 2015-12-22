@@ -1,6 +1,6 @@
 # Enrise Basebox
 
-[![Documentation Status](https://readthedocs.org/projects/enrise-basebox/badge/?version=latest)](http://enrise-basebox.readthedocs.org/en/latest/?badge=latest)
+[![Documentation](https://readthedocs.org/projects/enrise-basebox/badge/?version=master)](http://enrise-basebox.readthedocs.org/)
 
 This box serves as a standardized version of Vagrant box and should be used for new projects.
 
