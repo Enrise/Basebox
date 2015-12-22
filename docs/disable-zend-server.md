@@ -35,7 +35,7 @@ install-php-cli:
     - pkgs:
       - php5-cli
     - require_in:
-      - pkg: composer
+      - cmd: get-composer
 ```
 
 ## Build the box
