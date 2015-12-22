@@ -11,6 +11,3 @@ This box provides a default web-stack (ZendServer 7.0 + Nginx + MariaDB) using t
 The box should be build on a Debian or Ubuntu VM.
 
 Further requirements (e.g. Node, Postgres, Composer etc) can be added by the user of this box.
-
-For more information and installation details check
-[the documentation](http://enrise-basebox.readthedocs.org/en/latest/).

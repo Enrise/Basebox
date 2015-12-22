@@ -1,0 +1,12 @@
+site_name: Enrise Basebox
+theme: readthedocs
+pages:
+  - [index.md, Home]
+  - [installation.md, Installation]
+  - [configure-vagrant.md, Configure Vagrant]
+  - [configure-salt.md, Configure Salt]
+  - [starting.md, Starting the VM]
+  - [updating.md, Updating Basebox]
+  - [standard-packages.md, Standard packages]
+  - [sending-mail.md, Sending mail]
+  - [issues.md, Open issues]
