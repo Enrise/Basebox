@@ -1,5 +1,7 @@
 # Enrise Basebox
 
+[![Documentation Status](https://readthedocs.org/projects/enrise-basebox/badge/?version=latest)](http://enrise-basebox.readthedocs.org/en/latest/?badge=latest)
+
 This box serves as a standardized version of Vagrant box and should be used for new projects.
 
 Provisioning is done using [Saltstack](http://saltstack.org), which uses various default
