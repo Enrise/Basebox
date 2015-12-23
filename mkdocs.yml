@@ -9,4 +9,5 @@ pages:
   - [updating.md, Updating Basebox]
   - [standard-packages.md, Standard packages]
   - [sending-mail.md, Sending mail]
+  - [disable-zend-server.md, Disable Zend Server]
   - [issues.md, Open issues]
