@@ -1,3 +1,4 @@
 .vagrant
 *.bak
 Vagrantfile.local
+.idea
