@@ -3,7 +3,7 @@
 
 # You can set these variables in ~/.vagrant.d/Vagrantfile, if you wish to change the defaults.
 # or override these values in a Vagrantfile.local.
-$vm_memory                ||= "1024"
+$vm_memory                ||= 1024
 $vm_cpus                  ||= 1
 $mount_type               ||= "virtualbox"
 $mount_options_virtualbox ||= ["dmode=777", "fmode=777"]

@@ -4,7 +4,7 @@ $vm_ip       = "192.168.56.123"
 $vm_box      = "ubuntu/trusty64"
 
 # Optional aliases to set (requires vagrant-hostsupdater plugin)
-# $vm_aliases  = ['alias1.nl', 'alias2.com']
+# $vm_aliases  = ["alias1.nl", "alias2.com"]
 
 # Define how much memory you want to assign to the VM
 # $vm_memory = 1024
@@ -16,6 +16,7 @@ $vm_box      = "ubuntu/trusty64"
 
 # For each mount type the mount options can be specified.
 # Uncomment the correct line below and modify as needed.
+# To mount without mount options, simply use nil.
 # $mount_options_virtualbox = ["dmode=777", "fmode=777"]
 # $mount_options_nfs    = ["actimeo=2"]
 # $mount_options_rsync  = []
