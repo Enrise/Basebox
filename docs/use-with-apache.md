@@ -11,6 +11,16 @@ vhosting:
     webserver_edition: vanilla
 ```
 
+## Add the apache2 formula
+The basebox does not come with the [apache2 salt formula](https://github.com/Enrise/apache-formula) but it is easy to add it to your basebox setup.
+Add the apache2 formula to your repository and create a link to it in the `states/` directory like so:
+
+```bash
+# From your project root
+git submodule add git@github.com:Enrise/apache-formula.git dev/salt/formulas/apache-formula
+ln -s ../../formulas/apache-formula/apache dev/salt/states/apache
+```
+
 ## Override the project.sls file
 By default the nginx state file is included, and if you use apache it should not run it at all.
 You can prevent salt from running the nginx state by removing the reference to it from the project.sls file.
