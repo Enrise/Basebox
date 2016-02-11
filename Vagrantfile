@@ -3,24 +3,24 @@
 
 # You can set these variables in ~/.vagrant.d/Vagrantfile, if you wish to change the defaults.
 # or override these values in a Vagrantfile.local.
-$vm_memory        ||= "1024"
-$vm_cpus          ||= nil
-$use_nfs          ||= true
-$vm_hostname      ||= 'unconfigured.vagrant.box'
-$vm_box           ||= 'ubuntu/trusty64'
-$vm_aliases       ||= nil
-$vm_ip            ||= '192.168.56.100'
-$basebox_path     ||= 'dev/basebox'
-$salt_highstate   ||= true
-$salt_custom_path ||= 'dev/salt'
+$vm_memory                ||= 1024
+$vm_cpus                  ||= 1
+$mount_type               ||= "virtualbox"
+$mount_options_virtualbox ||= ["dmode=777", "fmode=777"]
+$mount_options_nfs        ||= ["actimeo=2"]
+$mount_options_rsync      ||= []
+$vm_hostname              ||= 'unconfigured.vagrant.box'
+$vm_box                   ||= 'ubuntu/trusty64'
+$vm_aliases               ||= nil
+$vm_ip                    ||= '192.168.56.100'
+$basebox_path             ||= 'dev/basebox'
+$salt_highstate           ||= true
+$salt_custom_path         ||= 'dev/salt'
 
 # Include Vagrantfile.local if it exists to overwrite the variables.
 if File.exists?("Vagrantfile.local")
   eval File.read("Vagrantfile.local")
 end
-
-# Use nfs by default, but don't if $use_nfs is false.
-$type = $use_nfs ? "nfs" : nil
 
 Vagrant.configure("2") do |config|
   # Configure the hostname.
@@ -32,34 +32,44 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: $vm_ip
   config.ssh.forward_agent = true
 
-  # Create synchronised folders
-  if $use_nfs
-    config.vm.synced_folder ".", "/vagrant", :nfs => { :mount_options => ["dmode=775","fmode=775"] }
-  else
-    config.vm.synced_folder ".", "/vagrant", :type => $type, :mount_options => ["dmode=775","fmode=775"]
-  end
-  config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: $type
-
-  if File.exists?($salt_custom_path)
-    config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: $type
+  config.vm.define $vm_hostname do |t|
   end
 
-  config.vm.provider "virtualbox" do |v|
-    v.name = hostname
+  # Mounts
+  if $mount_type == "virtualbox"
+    config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", type: "virtualbox", mount_options: $mount_options_virtualbox
+    config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: "virtualbox"
+    if File.exists?($salt_custom_path)
+      config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: "virtualbox"
+    end
+  end
 
+  if $mount_type == "nfs"
+    config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: $mount_options_nfs
+    config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: "nfs"
+    if File.exists?($salt_custom_path)
+      config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: "nfs"
+    end
+  end
+
+  if $mount_type == "rsync"
+    # Todo : Add the proper rsync mounts in the future if this is being used.
+    # If the need arises, we gladly accept PRs or work with you on adding this!
+  end
+
+  config.vm.provider :virtualbox do |v|
     v.customize [
       "modifyvm", :id,
       "--natdnshostresolver1", "on",
       "--natdnsproxy1", "on",
       "--memory", $vm_memory,
+      "--cpus", $vm_cpus,
     ]
+  end
 
-    if !$vm_cpus.nil?
-      v.customize [
-        "modifyvm", :id,
-        "--cpus", $vm_cpus,
-      ]
-    end
+  config.vm.provider :libvirt do |v|
+    v.memory = $vm_memory
+    v.cpus = $vm_cpus
   end
 
   # Add aliases to the hosts-file.
@@ -75,9 +85,9 @@ Vagrant.configure("2") do |config|
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
 
-    if $type == "nfs" then
+    if $mount_type == "nfs" then
       config.cache.synced_folder_opts = {
-        type: $type,
+        type: "nfs",
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
       }
     end
@@ -115,7 +125,7 @@ MSG
 
     salt.colorize = true
     salt.log_level = "info"
-    salt.verbose = true
+    salt.verbose = false
   end
 
 end

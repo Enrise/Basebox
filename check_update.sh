@@ -32,18 +32,18 @@ if [ $? -eq 0 ]; then
 
   if [[ $LOCAL == $REMOTE ]]; then
     echo -n -e "\e[92m"
-    echo "Your basebox is up-to-date."
+    echo -n "Your basebox is up-to-date."
   elif [[ $LOCAL == $BASE ]]; then
     echo -n -e "\e[36m"
-    echo "Your basebox requires an update."
+    echo -n "Your basebox requires an update."
   elif [[ $REMOTE == $BASE ]]; then
     echo -n -e "\e[33m"
     echo "Your basebox has local changes."
     echo "Customizations should be done in the Vagrantfile.local and dev/salt folders instead!"
-    echo "Please revert these changes where possible"
+    echo -n "Please revert these changes where possible"
   else
     echo -n -e "\e[31m"
-    echo "Unable to check for basebox updates"
+    echo -n "Unable to check for basebox updates"
   fi
-  echo -n -e "\e[0m"
+  echo -e "\e[0m"
 fi
