@@ -1,0 +1,3 @@
+language: python
+
+# We currently don't test anything other than if the specified submodule commits are actually available for checkout.
