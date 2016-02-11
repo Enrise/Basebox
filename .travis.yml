@@ -1,3 +1,6 @@
 language: python
 
 # We currently don't test anything other than if the specified submodule commits are actually available for checkout.
+install: echo "Skipping installation..."
+script: git submodule sync && git submodule update --init --recursive
+
