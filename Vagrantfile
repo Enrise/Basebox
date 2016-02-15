@@ -9,13 +9,15 @@ $mount_type               ||= "virtualbox"
 $mount_options_virtualbox ||= ["dmode=777", "fmode=777"]
 $mount_options_nfs        ||= ["actimeo=2"]
 $mount_options_rsync      ||= []
-$vm_hostname              ||= 'unconfigured.vagrant.box'
-$vm_box                   ||= 'ubuntu/trusty64'
+$vm_hostname              ||= "unconfigured.vagrant.box"
+$vm_box                   ||= "ubuntu/trusty64"
 $vm_aliases               ||= nil
-$vm_ip                    ||= '192.168.56.100'
-$basebox_path             ||= 'dev/basebox'
+$vm_ip                    ||= "192.168.56.100"
+$basebox_path             ||= "dev/basebox"
 $salt_highstate           ||= true
-$salt_custom_path         ||= 'dev/salt'
+$salt_custom_path         ||= "dev/salt"
+$salt_log_level           ||= "info"
+$salt_verbose             ||= false
 
 # Include Vagrantfile.local if it exists to overwrite the variables.
 if File.exists?("Vagrantfile.local")
@@ -124,8 +126,8 @@ MSG
     # End Temporary Workaround
 
     salt.colorize = true
-    salt.log_level = "info"
-    salt.verbose = false
+    salt.log_level = $salt_log_level
+    salt.verbose = $salt_verbose
   end
 
 end

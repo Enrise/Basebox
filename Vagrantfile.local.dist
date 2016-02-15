@@ -29,3 +29,7 @@ $vm_box      = "ubuntu/trusty64"
 
 # Run Salt highstate upon provisioning
 # $salt_highstate = true
+
+# Set the Salt verbosity and log level
+# $salt_log_level = "info"
+# $salt_verbose = false
