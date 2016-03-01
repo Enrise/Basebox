@@ -21,19 +21,11 @@ git submodule add git@github.com:Enrise/apache-formula.git dev/salt/formulas/apa
 ln -s ../../formulas/apache-formula/apache dev/salt/states/apache
 ```
 
-## Override the project.sls file
-By default the nginx state file is included, and if you use apache it should not run it at all.
-You can prevent salt from running the nginx state by removing the reference to it from the project.sls file.
-
-The project.sls file does not exist in your custom salt directory, so you have to create it.
+## Remove the nginx pillar configuration
+By default the nginx pillar file is included, and if you use Apache it should not use that it at all.
+You can prevent salt from loading the nginx pillar configuration by placing an empty version of the file in the default folder.
 
 ```yaml
-# dev/salt/pillars/project.sls
-include:
-  - defaults.mysql
-#  - defaults.nginx # Remove or comment this line
-  - defaults.phpfpm
-  - defaults.zendserver
-  - defaults.vhosting
-  - vhosts
+# File: dev/salt/pillars/defaults/nginx.sls
+nginx: ~
 ```
