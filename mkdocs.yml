@@ -10,4 +10,5 @@ pages:
   - [standard-packages.md, Standard packages]
   - [sending-mail.md, Sending mail]
   - [disable-zend-server.md, Disable Zend Server]
+  - [use-with-apache.md, Use with apache]
   - [issues.md, Open issues]
