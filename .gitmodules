@@ -18,4 +18,4 @@
 	url = https://github.com/Enrise/composer-formula.git
 [submodule "salt/formulas/mailhog"]
 	path = salt/formulas/mailhog
-	url = git@github.com:Enrise/mailhog-formula.git
+	url = https://github.com/Enrise/mailhog-formula.git
