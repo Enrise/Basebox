@@ -12,6 +12,7 @@ $mount_options_rsync      ||= []
 $vm_hostname              ||= "unconfigured.vagrant.box"
 $vm_box                   ||= "ubuntu/trusty64"
 $vm_aliases               ||= nil
+$vm_mounts                ||= {"." => "/vagrant"}
 $vm_ip                    ||= "192.168.56.100"
 $basebox_path             ||= "dev/basebox"
 $salt_highstate           ||= true
@@ -39,7 +40,9 @@ Vagrant.configure("2") do |config|
 
   # Mounts
   if $mount_type == "virtualbox"
-    config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", type: "virtualbox", mount_options: $mount_options_virtualbox
+    $vm_mounts.each do |source_path, target_path|
+      config.vm.synced_folder source_path, target_path, owner: "vagrant", group: "vagrant", type: "virtualbox", mount_options: $mount_options_virtualbox
+    end
     config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: "virtualbox"
     if File.exists?($salt_custom_path)
       config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: "virtualbox"
@@ -47,7 +50,10 @@ Vagrant.configure("2") do |config|
   end
 
   if $mount_type == "nfs"
-    config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: $mount_options_nfs
+    $vm_mounts.each do |source_path, target_path|
+      config.vm.synced_folder source_path, target_path, type: "nfs", mount_options: $mount_options_nfs
+    end
+
     config.vm.synced_folder $basebox_path + "/salt", "/srv/salt/base", type: "nfs"
     if File.exists?($salt_custom_path)
       config.vm.synced_folder $salt_custom_path, "/srv/salt/custom", type: "nfs"

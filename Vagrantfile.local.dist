@@ -6,6 +6,12 @@ $vm_box      = "ubuntu/trusty64"
 # Optional aliases to set (requires vagrant-hostsupdater plugin)
 # $vm_aliases  = ["alias1.nl", "alias2.com"]
 
+# Optional: Override synced_folders that are defined (default: {"." => "/vagrant"})
+# $vm_mounts = {
+#   "." => "/srv/http/app-one/current",
+#   "../app-two" => "/srv/http/app-two/current"
+# }
+
 # Define how much memory you want to assign to the VM
 # $vm_memory = 1024
 # $vm_cpus   = 1
