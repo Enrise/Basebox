@@ -64,8 +64,8 @@ fi
 
 COMMITS_BEHIND=$(git rev-list --left-right --count master...origin/master | awk {'print $2'})
 if [ $COMMITS_BEHIND -gt 0 ]; then
-    color_echo $YELLOW "Your basebox is behind by $COMMITS_BEHIND and requires an update."
-    color_echo $YELLOW "Please make sure to update as soon as possible to prevent problems and techincal debt."
+    color_echo $YELLOW "Your basebox is behind by $COMMITS_BEHIND commit(s) and requires an update."
+    color_echo $YELLOW "Please make sure to update as soon as possible to prevent problems and technical debt."
     exit 0;
 fi
 
