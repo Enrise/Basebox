@@ -55,14 +55,16 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-COMMITS_AHEAD=$(git rev-list --left-right --count master...origin/master | awk {'print $1'})
+COMMITS_DIFF=$(git rev-list --left-right --count HEAD...origin/master)
+COMMITS_AHEAD=$(echo $COMMITS_DIFF | awk '{print $1}')
+COMMITS_BEHIND=$(echo $COMMITS_DIFF | awk '{print $1}')
+
 if [ $COMMITS_AHEAD -gt 0 ]; then
     color_echo $YELLOW "You made $COMMITS_AHEAD local commit(s) in the basebox."
     color_echo $YELLOW "Don't forget to open a Pull Request against the Enrise repo."
     exit 0;
 fi
 
-COMMITS_BEHIND=$(git rev-list --left-right --count master...origin/master | awk {'print $2'})
 if [ $COMMITS_BEHIND -gt 0 ]; then
     color_echo $YELLOW "Your basebox is behind by $COMMITS_BEHIND commit(s) and requires an update."
     color_echo $YELLOW "Please make sure to update as soon as possible to prevent problems and technical debt."
