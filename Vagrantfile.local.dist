@@ -1,4 +1,5 @@
 # Configure base settings for your box
+# See the documentation for further details: http://enri.se/basebox-docs
 $vm_hostname = "my.vagrant.box"
 $vm_ip       = "192.168.56.123"
 $vm_box      = "ubuntu/trusty64"
@@ -30,6 +31,10 @@ $vm_box      = "ubuntu/trusty64"
 # If the basebox is located somewhere else it can be entered here.
 # $basebox_path = "dev/basebox"
 
+#####
+### Saltstack provisioner settings
+#####
+
 # If the Salt custom path is located somewhere else it can be entered here.
 # $salt_custom_path = "dev/salt"
 
@@ -39,3 +44,13 @@ $vm_box      = "ubuntu/trusty64"
 # Set the Salt verbosity and log level
 # $salt_log_level = "info"
 # $salt_verbose = false
+
+# Set the Salt version.
+# e.g.: "stable", "stable 2015.8", "daily", "testing", "git", "git develop",
+#       "git v2015.8", "git 8c3fadf15ec183e5ce8c63739850d543617e4357"
+# $salt_version = "stable"
+
+# Set the Salt bootstrap & install script options
+# See http://enri.se/salt-bootstrap-docs for available flags & options
+# $salt_bootstrap_options = "-P -X"
+# $salt_install_args = ""

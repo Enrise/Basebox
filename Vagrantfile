@@ -19,6 +19,9 @@ $salt_highstate           ||= true
 $salt_custom_path         ||= "dev/salt"
 $salt_log_level           ||= "info"
 $salt_verbose             ||= false
+$salt_version             ||= "stable"
+$salt_bootstrap_options   ||= "-P -X"
+$salt_install_args        ||= ""
 
 # Include Vagrantfile.local if it exists to overwrite the variables.
 if File.exists?("Vagrantfile.local")
@@ -126,10 +129,8 @@ MSG
     salt.minion_config = $basebox_path + "/salt/minion"
     salt.run_highstate = $salt_highstate
 
-    # Start Temporary Workaround for Vagrant Issues #6011, #6029
-    salt.install_args = "-P"
-    salt.bootstrap_options = "-F -c /tmp -P"
-    # End Temporary Workaround
+    salt.bootstrap_options = $salt_bootstrap_options
+    salt.install_args = $salt_version + " " + $salt_install_args
 
     salt.colorize = true
     salt.log_level = $salt_log_level
