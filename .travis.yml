@@ -8,8 +8,6 @@ dist: trusty
 
 matrix:
   fast_finish: true
-  #allow_failures:
-  #  - env: SALT_VERSION="git"
 
 env:
   global:
@@ -17,9 +15,10 @@ env:
     - BS_ECHO_DEBUG=1
     - SALT_ARGS="-l debug --local --retcode-passthrough"
   matrix:
+    # Current stable
     - SALT_VERSION="stable"
-    #- SALT_VERSION="stable 2015.8"
-    #- SALT_VERSION="git"
+    # Previous stable
+    - SALT_VERSION="stable 2015.8"
 
 before_install:
   - sudo apt-get update
