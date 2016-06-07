@@ -57,7 +57,7 @@ fi
 
 COMMITS_DIFF=$(git rev-list --left-right --count HEAD...origin/master)
 COMMITS_AHEAD=$(echo $COMMITS_DIFF | awk '{print $1}')
-COMMITS_BEHIND=$(echo $COMMITS_DIFF | awk '{print $1}')
+COMMITS_BEHIND=$(echo $COMMITS_DIFF | awk '{print $2}')
 
 if [ $COMMITS_AHEAD -gt 0 ]; then
     color_echo $YELLOW "You made $COMMITS_AHEAD local commit(s) in the basebox."
