@@ -29,7 +29,7 @@ before_install:
   # Basebox base setup
   - sudo groupadd vagrant
   # Clone the test environment, we actually don't do anything with the main project checkout :)
-  - git clone https://github.com/Enrise/basebox-test.git
+  - git clone --recursive https://github.com/Enrise/basebox-test.git
   - sudo mkdir -p /srv/salt
   - sudo ln -s $PWD/basebox-test/dev/basebox/salt /srv/salt/base
   - sudo ln -s $PWD/basebox-test/dev/salt /srv/salt/custom
