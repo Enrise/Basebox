@@ -42,7 +42,7 @@ before_install:
 
 install:
   # Install the ruby-lint gem for testing the Vagrantfile
-  - sudo gem install ruby-lint
+  #- sudo gem install ruby-lint
   # Show the loaded pillars since the states are generally depending on this
   - sudo salt-call pillar.items $SALT_ARGS
   # See what kind of travis box you're on to help with making your states
@@ -51,7 +51,7 @@ install:
 
 script:
   # Validate the Vagrantfile
-  - ruby-lint -a argument_amount -a loop_keywords -a pedantics -a shadowing_variables -a unused_variables -a useless_equality_checks Vagrantfile
+  #- ruby-lint -a argument_amount -a loop_keywords -a pedantics -a shadowing_variables -a unused_variables -a useless_equality_checks Vagrantfile
 
   # Run the salt highstate to validate Salt states/pillars
   - sudo -E salt-call state.highstate $SALT_ARGS
