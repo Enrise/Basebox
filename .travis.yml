@@ -51,8 +51,8 @@ install:
 
 script:
   # Validate the Vagrantfile
-  - rubocop --except "GlobalVars,LineLength,Eval" Vagrantfile
-  - rubocop --except "GlobalVars,LineLength,Eval,FileName" Vagrantfile.local.dist
+  - /usr/local/bin/rubocop --except "GlobalVars,LineLength,Eval" Vagrantfile
+  - /usr/local/bin/rubocop --except "GlobalVars,LineLength,Eval,FileName" Vagrantfile.local.dist
 
   # Run the salt highstate to validate Salt states/pillars
   - sudo -E salt-call state.highstate $SALT_ARGS
