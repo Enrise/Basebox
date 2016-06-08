@@ -41,8 +41,8 @@ before_install:
   - sudo rm /etc/mysql /var/lib/mysql /var/log/mysql -rf
 
 install:
-  # Install the ruby-lint gem for testing the Vagrantfile
-  #- sudo gem install ruby-lint
+  # Install the rubocop gem for testing the Vagrantfile
+  - sudo gem install rubocop
   # Show the loaded pillars since the states are generally depending on this
   - sudo salt-call pillar.items $SALT_ARGS
   # See what kind of travis box you're on to help with making your states
@@ -51,7 +51,8 @@ install:
 
 script:
   # Validate the Vagrantfile
-  #- ruby-lint -a argument_amount -a loop_keywords -a pedantics -a shadowing_variables -a unused_variables -a useless_equality_checks Vagrantfile
+  - rubocop --except "GlobalVars,LineLength,Eval" Vagrantfile
+  - rubocop --except "GlobalVars,LineLength,Eval,FileName" Vagrantfile.local.dist
 
   # Run the salt highstate to validate Salt states/pillars
   - sudo -E salt-call state.highstate $SALT_ARGS
