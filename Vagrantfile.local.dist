@@ -44,7 +44,7 @@ $vm_box      = 'ubuntu/trusty64'
 
 # Set the Salt verbosity and log level
 # $salt_log_level = 'info'
-# $salt_verbose = false
+# $salt_verbose = true
 
 # Set the Salt version.
 # e.g.: 'stable', 'stable 2015.8', 'daily', 'testing', 'git', 'git develop',
