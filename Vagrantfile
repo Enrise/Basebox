@@ -132,4 +132,9 @@ MSG
     salt.log_level = $salt_log_level
     salt.verbose = $salt_verbose
   end
+
+  # Temp fix for Vagrant 1.8.5
+  config.vm.provision "shell",
+    inline: "chmod 0600 ~/.ssh/authorized_keys"
+
 end
