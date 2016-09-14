@@ -121,8 +121,10 @@ Vagrant.configure('2') do |config|
 MSG
 
   # Temp fix for Vagrant 1.8.5
-  config.vm.provision "shell",
-    inline: "chmod 0600 /home/vagrant/.ssh/authorized_keys"
+  if Vagrant::VERSION =~ /^1.8.5/
+    config.vm.provision "shell",
+      inline: "chmod 0600 /home/vagrant/.ssh/authorized_keys"
+  end
 
   # And start the provisioning run!
   config.vm.provision :salt do |salt|
