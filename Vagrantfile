@@ -120,6 +120,10 @@ Vagrant.configure('2') do |config|
   Type "vagrant ssh" to login to the shell.
 MSG
 
+  # Temp fix for Vagrant 1.8.5
+  config.vm.provision "shell",
+    inline: "chmod 0600 /home/vagrant/.ssh/authorized_keys"
+
   # And start the provisioning run!
   config.vm.provision :salt do |salt|
     salt.minion_config = $basebox_path + '/salt/minion'
@@ -132,9 +136,5 @@ MSG
     salt.log_level = $salt_log_level
     salt.verbose = $salt_verbose
   end
-
-  # Temp fix for Vagrant 1.8.5
-  config.vm.provision "shell",
-    inline: "chmod 0600 ~/.ssh/authorized_keys"
 
 end
