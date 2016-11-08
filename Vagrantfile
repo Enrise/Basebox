@@ -97,7 +97,9 @@ Vagrant.configure('2') do |config|
         type: 'nfs',
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
       }
-    end
+    else
+      config.cache.auto_detect = true
+    end  
   end
 
   # Check if vagrant-triggers is available for update checks
