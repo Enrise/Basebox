@@ -91,13 +91,15 @@ Vagrant.configure('2') do |config|
   # Apt-cache for SPEED.
   if Vagrant.has_plugin?('vagrant-cachier')
     config.cache.scope = :box
-
+    
     if $mount_type == 'nfs'
       config.cache.synced_folder_opts = {
         type: 'nfs',
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
       }
-    end
+    else
+      config.cache.auto_detect = true
+    end  
   end
 
   # Check if vagrant-triggers is available for update checks
