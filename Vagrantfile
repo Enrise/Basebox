@@ -67,6 +67,7 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provider :virtualbox do |v|
+    v.linked_clone = true if Vagrant::VERSION =~ /^1.8/
     v.customize [
       'modifyvm', :id,
       '--natdnshostresolver1', 'on',
