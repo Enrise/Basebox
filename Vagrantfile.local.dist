@@ -17,6 +17,8 @@ $vm_box      = 'ubuntu/trusty64'
 # Define how much memory you want to assign to the VM
 # $vm_memory = 1024
 # $vm_cpus   = 1
+# Use 1 basebox on which delta's are applied to save diskspace (vbox >1.8)
+# $vm_linked_clone = true
 
 # Select the type of mounts to use. This can either be vboxfs, nfs, or rsync.
 # The default is virtualbox.

@@ -5,6 +5,7 @@
 # or override these values in a Vagrantfile.local.
 $vm_memory                ||= 1024
 $vm_cpus                  ||= 1
+$vm_linked_clone          ||= true
 $mount_type               ||= 'virtualbox'
 $mount_options_virtualbox ||= ['dmode=777', 'fmode=777']
 $mount_options_nfs        ||= ['actimeo=2']
@@ -67,6 +68,7 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provider :virtualbox do |v|
+    v.linked_clone = $vm_linked_clone if Vagrant::VERSION =~ /^1.8/
     v.customize [
       'modifyvm', :id,
       '--natdnshostresolver1', 'on',
