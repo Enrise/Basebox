@@ -8,7 +8,7 @@ $vm_cpus                  ||= 1
 $vm_linked_clone          ||= true
 $mount_type               ||= 'virtualbox'
 $mount_options_virtualbox ||= ['dmode=777', 'fmode=777']
-$mount_options_nfs        ||= ['actimeo=2']
+$mount_options_nfs        ||= ['vers=3', 'nolock', 'rw', 'tcp', 'fsc', 'actimeo=2']
 $mount_options_rsync      ||= []
 $vm_hostname              ||= 'unconfigured.vagrant.box'
 $vm_box                   ||= 'ubuntu/trusty64'
@@ -56,9 +56,9 @@ Vagrant.configure('2') do |config|
       config.vm.synced_folder source_path, target_path, type: 'nfs', mount_options: $mount_options_nfs
     end
 
-    config.vm.synced_folder $basebox_path + '/salt', '/srv/salt/base', type: 'nfs'
+    config.vm.synced_folder $basebox_path + '/salt', '/srv/salt/base', type: 'nfs', mount_options: $mount_options_nfs
     if File.exist?($salt_custom_path)
-      config.vm.synced_folder $salt_custom_path, '/srv/salt/custom', type: 'nfs'
+      config.vm.synced_folder $salt_custom_path, '/srv/salt/custom', type: 'nfs', mount_options: $mount_options_nfs
     end
   end
 
@@ -97,11 +97,11 @@ Vagrant.configure('2') do |config|
     if $mount_type == 'nfs'
       config.cache.synced_folder_opts = {
         type: 'nfs',
-        mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+        mount_options: $mount_options_nfs
       }
     else
       config.cache.auto_detect = true
-    end  
+    end
   end
 
   # Check if vagrant-triggers is available for update checks
