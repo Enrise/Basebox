@@ -8,7 +8,7 @@ $vm_cpus                  ||= 1
 $vm_linked_clone          ||= true
 $mount_type               ||= 'virtualbox'
 $mount_options_virtualbox ||= ['dmode=777', 'fmode=777']
-$mount_options_nfs        ||= ['actimeo=2']
+$mount_options_nfs        ||= ['vers=3', 'nolock', 'rw', 'tcp', 'fsc', 'actimeo=2']
 $mount_options_rsync      ||= []
 $vm_hostname              ||= 'unconfigured.vagrant.box'
 $vm_box                   ||= 'ubuntu/trusty64'
