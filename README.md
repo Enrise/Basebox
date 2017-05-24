@@ -16,4 +16,4 @@ The box should be built on a Debian or Ubuntu VM.
 Further requirements (e.g. Node, Postgres, Composer etc) can be added by the user of this box.
 
 For more information and installation details check
-[the documentation](https://enrise-basebox.readthedocs.io/).
+[the documentation](http://enrise-basebox.readthedocs.io/en/latest/).
