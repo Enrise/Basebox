@@ -81,6 +81,7 @@ Vagrant.configure('2') do |config|
   config.vm.provider :libvirt do |v|
     v.memory = $vm_memory
     v.cpus = $vm_cpus
+    v.cpu_mode = 'host-passthrough'
   end
 
   # Add aliases to the hosts-file.
