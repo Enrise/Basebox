@@ -18,4 +18,4 @@
 	url = https://github.com/Enrise/mailhog-formula.git
 [submodule "salt/formulas/zendserver"]
 	path = salt/formulas/zendserver
-	url = https://github.com/enrise/zendserver-formula.git
+	url = https://github.com/Enrise/zendserver-formula.git
