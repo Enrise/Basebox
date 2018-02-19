@@ -1,0 +1,63 @@
+language: python
+python:
+- '2.7'
+
+# Run on Trusty (14.04)
+sudo: required
+dist: trusty
+
+matrix:
+  fast_finish: true
+
+env:
+  global:
+    - BS_PIP_ALLOWED=1
+    - BS_ECHO_DEBUG=1
+    - SALT_ARGS="-l debug --local --retcode-passthrough"
+  matrix:
+    # Current stable
+    - SALT_VERSION="stable"
+    # Previous stable (for some reason regularly hanging so therefore disabled)
+    #- SALT_VERSION="stable 2015.8"
+
+before_install:
+  # Ensure the apt cache is up-to-date
+  - sudo apt-get update
+  # Temporary workaround for vhosting-formula#1
+  - sudo mkdir -p /etc/salt/minion.d
+  - echo "mysql.default_file:" "'/etc/mysql/debian.cnf'" | sudo tee -a /etc/salt/minion.d/mysql.conf
+  # Basebox relies on group vagrant, adding
+  - sudo groupadd vagrant
+  # Clone the test environment, we actually don't do anything with the main project checkout :)
+  - git clone --recursive https://github.com/Enrise/basebox-test.git
+  - sudo mkdir -p /srv/salt
+  - sudo ln -s $PWD/basebox-test/dev/basebox/salt /srv/salt/base
+  - sudo ln -s $PWD/basebox-test/dev/salt /srv/salt/custom
+  - sudo ln -s $PWD/basebox-test/dev/basebox/salt/minion /etc/salt/minion.d/basebox.conf
+  # Install Salt-minion at the desired version
+  - curl -L http://bootstrap.saltstack.org | sudo -E sh -s -- $SALT_VERSION
+  # Cleanup Travis' MySQL leftovers as they conflict with the MariaDB clean install
+  - sudo apt-get purge mysql-common mysql-server mysql-client -y
+  - sudo rm /etc/mysql /var/lib/mysql /var/log/mysql -rf
+
+install:
+  # Install the rubocop gem for testing the Vagrantfile
+  #- sudo gem install rubocop
+  # Show the loaded pillars since the states are generally depending on this
+  - sudo salt-call pillar.items $SALT_ARGS
+  # See what kind of travis box you're on to help with making your states
+  # compatible with travis
+  - sudo salt-call grains.items $SALT_ARGS
+
+script:
+  # Validate the Vagrantfile (doesnt seem to work on TravisCI sadly)
+  #- /usr/local/bin/rubocop --except "GlobalVars,LineLength,Eval" Vagrantfile
+  #- /usr/local/bin/rubocop --except "GlobalVars,LineLength,Eval,FileName" Vagrantfile.local.dist
+
+  # Run the salt highstate to validate Salt states/pillars
+  - sudo -E salt-call state.highstate $SALT_ARGS
+
+  # Idempotence check
+  - sudo -E salt-call state.highstate $SALT_ARGS > /tmp/second
+  - cat /tmp/second
+  - bash -c '! grep -q "^Not Run:" /tmp/second'

@@ -1,6 +1,3 @@
-[submodule "salt/formulas/zendserver"]
-	path = salt/formulas/zendserver
-	url = https://github.com/saltstack-formulas/zendserver-formula.git
 [submodule "salt/formulas/phpfpm"]
 	path = salt/formulas/phpfpm
 	url = https://github.com/Enrise/phpfpm-formula.git
@@ -16,3 +13,9 @@
 [submodule "salt/formulas/composer"]
 	path = salt/formulas/composer
 	url = https://github.com/Enrise/composer-formula.git
+[submodule "salt/formulas/mailhog"]
+	path = salt/formulas/mailhog
+	url = https://github.com/Enrise/mailhog-formula.git
+[submodule "salt/formulas/zendserver"]
+	path = salt/formulas/zendserver
+	url = https://github.com/enrise/zendserver-formula.git
