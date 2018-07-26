@@ -105,7 +105,7 @@ Vagrant.configure('2') do |config|
     end
   end
 
-  # Check if vagrant-triggers is available for update checks
+  # Check if vagrant-triggers is available for update checks (for Vagrant < 2.1.0)
   if Vagrant.has_plugin?('vagrant-triggers')
     {
       [:up, :resume, :provision] => $basebox_path + '/check_update.sh'
@@ -114,6 +114,12 @@ Vagrant.configure('2') do |config|
         run trigger.to_s
       end
     end
+  end
+
+  # Do update checks natively if Vagrant >= 2.1.0 is being used
+  if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('2.1.0')
+    config.trigger.before :up, :resume, :provision,
+      run: {path: $basebox_path + '/check_update.sh'}
   end
 
   config.vm.post_up_message = <<MSG

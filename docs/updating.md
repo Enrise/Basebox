@@ -23,5 +23,5 @@ git pull origin master
 git submodule sync  && git submodule update --init --recursive
 ```
 
-> **Hint**: If you have the `vagrant-triggers` plugin installed it will automatically check and notify you if there are
+> **Hint**: If you have the `vagrant-triggers` plugin installed (only required for Vagrant < 2.1.0) it will automatically check and notify you if there are
 > updates upon the following tasks: up, resume and provision.
