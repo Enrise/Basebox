@@ -28,7 +28,7 @@ $vm_box      = 'bento/ubuntu-18.04'
 # Uncomment the correct line below and modify as needed.
 # To mount without mount options, simply use nil.
 # $mount_options_virtualbox = ['dmode=777', 'fmode=777']
-# $mount_options_nfs    = ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2']
+# $mount_options_nfs    = ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2', 'nolock']
 # $mount_options_rsync  = []
 
 # If the basebox is located somewhere else it can be entered here.
