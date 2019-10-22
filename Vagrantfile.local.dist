@@ -2,7 +2,7 @@
 # See the documentation for further details: http://enri.se/basebox-docs
 $vm_hostname = 'my.vagrant.box'
 $vm_ip       = '192.168.56.123'
-$vm_box      = 'ubuntu/trusty64'
+$vm_box      = 'bento/ubuntu-18.04'
 
 # Optional aliases to set (requires vagrant-hostsupdater plugin)
 # $vm_aliases  = ['alias1.nl', 'alias2.com']

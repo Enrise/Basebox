@@ -1,0 +1,22 @@
+{%- set php_versions = ['7.2', '7.3'] %}
+vhosting:
+  server:
+    webserver: nginx
+    webserver_edition: vanilla
+
+phpfpm:
+  php_versions:
+  {% for version in php_versions %}
+    - '{{version}}'
+  {%- endfor %}
+  modules:
+  {% for version in php_versions %}
+    - php{{version}}-curl
+    - php{{version}}-gd
+    - php{{version}}-intl
+    - php{{version}}-json
+    - php{{version}}-mbstring
+    - php{{version}}-mysql
+    - php{{version}}-xml
+    - php{{version}}-zip
+  {%- endfor %}
