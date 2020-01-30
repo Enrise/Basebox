@@ -21,7 +21,7 @@ $salt_custom_path         ||= 'dev/salt'
 $salt_log_level           ||= 'info'
 $salt_verbose             ||= true
 $salt_version             ||= 'stable'
-$salt_bootstrap_options   ||= '-P -X'
+$salt_bootstrap_options   ||= '-P -X -x python3.6'
 $salt_install_args        ||= ''
 
 # Include Vagrantfile.local if it exists to overwrite the variables.

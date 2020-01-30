@@ -55,5 +55,5 @@ $vm_box      = 'ubuntu/trusty64'
 
 # Set the Salt bootstrap & install script options
 # See http://enri.se/salt-bootstrap-docs for available flags & options
-# $salt_bootstrap_options = '-P -X'
+# $salt_bootstrap_options = '-P -X -x python3.6'
 # $salt_install_args = ''
