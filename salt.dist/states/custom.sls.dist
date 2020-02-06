@@ -1,0 +1,12 @@
+{% set php_version = '7.3' %}
+extend:
+  /srv/http/project/hosts/projectname-dev.enrise.com:
+    file.symlink:
+      - target: ../current
+      - owner: vagrant
+      - group: vagrant
+      - require:
+        - file: /srv/http/project/hosts
+      - watch_in:
+        - service: nginx
+        - service: php{{ php_version }}-fpm

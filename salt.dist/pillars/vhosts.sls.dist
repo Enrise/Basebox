@@ -1,9 +1,11 @@
+{% set php_version = '7.3' %}
 vhosting:
   users:
     project:
       vhost:
         projectname-dev.enrise.com:
           webroot_public: True
+          php_version: '{{ php_version }}'
           fastcgi_params:
             - fastcgi_param APPLICATION_ENV development;
           extra_config:

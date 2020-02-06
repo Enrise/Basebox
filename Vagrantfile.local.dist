@@ -2,7 +2,7 @@
 # See the documentation for further details: http://enri.se/basebox-docs
 $vm_hostname = 'my.vagrant.box'
 $vm_ip       = '192.168.56.123'
-$vm_box      = 'ubuntu/trusty64'
+$vm_box      = 'bento/ubuntu-18.04'
 
 # Optional aliases to set (requires vagrant-hostsupdater plugin)
 # $vm_aliases  = ['alias1.nl', 'alias2.com']
@@ -28,7 +28,7 @@ $vm_box      = 'ubuntu/trusty64'
 # Uncomment the correct line below and modify as needed.
 # To mount without mount options, simply use nil.
 # $mount_options_virtualbox = ['dmode=777', 'fmode=777']
-# $mount_options_nfs    = ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2']
+# $mount_options_nfs    = ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2', 'nolock']
 # $mount_options_rsync  = []
 
 # If the basebox is located somewhere else it can be entered here.
@@ -55,5 +55,5 @@ $vm_box      = 'ubuntu/trusty64'
 
 # Set the Salt bootstrap & install script options
 # See http://enri.se/salt-bootstrap-docs for available flags & options
-# $salt_bootstrap_options = '-P -X'
+# $salt_bootstrap_options = '-P -X -x python3.6'
 # $salt_install_args = ''
