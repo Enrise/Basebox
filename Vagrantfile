@@ -20,7 +20,7 @@ $salt_highstate           ||= true
 $salt_custom_path         ||= 'dev/salt'
 $salt_log_level           ||= 'info'
 $salt_verbose             ||= true
-$salt_version             ||= 'stable'
+$salt_version             ||= 'stable 3003'
 $salt_bootstrap_options   ||= '-P -X -x python3.6'
 $salt_install_args        ||= ''
 
