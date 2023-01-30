@@ -1,6 +1,7 @@
 [submodule "salt/formulas/phpfpm"]
 	path = salt/formulas/phpfpm
 	url = https://github.com/Enrise/phpfpm-formula.git
+	branch = SUP-2293
 [submodule "salt/formulas/mariadb"]
 	path = salt/formulas/mariadb
 	url = https://github.com/Enrise/mariadb-formula.git
